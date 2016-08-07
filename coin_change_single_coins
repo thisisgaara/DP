@@ -1,0 +1,26 @@
+# coin change problem
+# min(T[i], 1 + T[i - coins[j]])
+
+def min(a, b):
+    if(a <= b):
+        return a
+    return b
+def coin_change(coins, T):
+    INT_MAX = 32767
+    DP = [INT_MAX for i in range(0, T+1)]
+    aux_array = [-1 for i in range(0, T + 1)]
+    DP[0] = 0
+    for j in range(0, len(coins)):
+        for i in range(0, T):
+            if( i >= coins[j]):
+                temp = DP[i]
+                DP[i] = min(DP[i], 1 + DP[i - coins[j]])
+                if temp != DP[i]:
+                    aux_array[i] = j;
+    pass
+
+def main():
+    coins = [7,2,3,6]
+    T = 13
+    coin_change(coins, T)
+main()
